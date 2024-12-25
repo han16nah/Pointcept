@@ -15,11 +15,11 @@ class Hessigheim3DDataset(DefaultDataset):
     def get_data_list(self):
         # data is located in a folder specifying the tiling structure
         if isinstance(self.split, str):
-            data_list = list(Path(self.data_root).rglob(f"{self.split}/*"))
+            data_list = list(Path(self.data_root).rglob(f"{self.split}/*/*"))
         elif isinstance(self.split, Sequence):
             data_list = []
             for split in self.split:
-                data_list += Path(self.data_root).rglob(f"{split}/*")
+                data_list += Path(self.data_root).rglob(f"{split}/*/*")
         else:
             raise NotImplementedError
         print(data_list)
