@@ -22,6 +22,7 @@ class Hessigheim3DDataset(DefaultDataset):
                 data_list += Path(self.data_root).rglob(f"{split}/*")
         else:
             raise NotImplementedError
+        print(data_list)
         return data_list
     
     def get_data_name(self, idx):
