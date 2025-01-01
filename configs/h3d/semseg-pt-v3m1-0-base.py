@@ -1,10 +1,10 @@
 _base_ = ["../_base_/default_runtime.py"]
 
 # misc custom setting
-batch_size = 12  # bs: total bs in all gpus
+batch_size = 3  # bs: total bs in all gpus
 num_worker = 6
 mix_prob = 0.8
-empty_cache = False
+empty_cache = True
 enable_amp = True
 
 # model settings
@@ -141,6 +141,7 @@ data = dict(
             ),
             dict(
                 type="GridSample",
+                keys=("coord", "segment"),
                 grid_size=0.02,
                 hash_type="fnv",
                 mode="train",
@@ -159,7 +160,7 @@ data = dict(
                     "origin_segment",
                 ),
                 offset_keys_dict=dict(offset="coord", origin_offset="origin_coord"),
-                feat_keys=("normal"),
+                feat_keys=("coord",),  # normal
             ),
         ],
         test_mode=False,
@@ -190,7 +191,7 @@ data = dict(
                 dict(
                     type="Collect",
                     keys=("coord", "grid_coord", "index"),
-                    feat_keys=("normal"),
+                    feat_keys=("coord",),  # normal
                 ),
             ],
             aug_transform=[
